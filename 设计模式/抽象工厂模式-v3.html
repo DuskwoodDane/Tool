@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // user无法被直接new
+    class User {
+      constructor(name, role, pages) {
+        this.name = name;
+        this.role = role;
+        this.pages = pages;
+      }
+
+      welcome() {
+        console.log('welcome', this.name);
+      }
+
+      dataShow() {
+        // abstract 抽象方法
+        throw new Error('抽象方法需要被实现')
+      }
+    }
+
+    class SuperAdmin extends User {
+      constructor(name) {
+        super(name, 'superadmin', ['home', 'main', 'user-manage', 'news-manage']);
+      }
+
+      dataShow() {
+        console.log('show== SuperAdimn');
+      }
+
+      addMain() {
+        console.log('addMain')
+      }
+
+      addUser() {
+        console.log('addUser')
+      }
+
+      addNew() {
+        console.log('addNew')
+      }
+    }
+
+    class Admin extends User {
+      constructor(name) {
+        super(name, 'admin', ['home', 'user-manage', 'news-manage']);
+      }
+
+      dataShow() {
+        console.log('show== Admin');
+      }
+
+
+      addUser() {
+        console.log('addUser-admin')
+      }
+
+      addNew() {
+        console.log('addNew-admin')
+      }
+    }
+
+    class Editor extends User {
+      constructor(name) {
+        super(name, 'editor', ['home', 'news-manage']);
+      }
+
+      dataShow() {
+        console.log('show== editor');
+      }
+
+
+      addNew() {
+        console.log('addNew-editor')
+      }
+    }
+
+    // 获取抽象函数工厂
+    function getAbstractUserFactory(role) {
+      switch (role) {
+        case 'superadmin':
+          return SuperAdmin;
+          break;
+        case 'admin':
+          return Admin;
+          break;
+        case 'editor':
+          return Editor;
+          break;
+        default:
+          throw new Error('参数错误')
+      }
+    }
+
+    const userClass = getAbstractUserFactory('superadmin');
+
+    const u1 = new userClass('Jerry');
+
+  </script>
+</body>
+
+</html>

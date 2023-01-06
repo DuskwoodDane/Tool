@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>git标准文档</title>
+  <script>
+    /**
+     *
+     *  ------------------------------  提交操作
+     *   git add .
+     *      -- 添加到暂存区
+     *   git commit -m '提交信息'
+     *      -- 将暂存区的所有信息提交到当前分支
+     *   git status
+     *      -- 查看当前状态(红色为文件已修改,未添加,绿色为已添加,但未提交,如果都没有,则是没有修改)
+     *   git diff 文件名
+     *      -- 查看修改后的文件(若文件没修改,则不会进行任何改变)
+     *
+     *
+     *
+     *  ------------------------------ 历史回退
+     *   git log
+     *      -- 查看历史的提交记录
+     *   git reset --hard HEAD^
+     *      -- 在Git中，用HEAD表示当前版本,上一个版本就是HEAD^，
+     *        上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。
+     *   (git reset --hard 提交的前面四个字符)
+     *      -- 如果版本回溯后,又想重新拿回之前被回溯掉的历史记录(提交前面的四个字符可在回溯之前通过git log看到)
+     *    git checkout -- 文件名
+     *      -- 在 git add .之前,你对你的文件进行一些错误的修改,你想让他还原到之前的文件
+     *    git reset HEAD 文件名
+     *      -- 在git add .之后,你对你的文件进行一些错误的修改,
+     *          将暂存区的修改回退到工作区,再使用git checkout -- 文件名的方式可以还原到之前的文件
+     *    git rm 文件名 , git commit -m '删除文件的信息'
+     *      --  如果删除了某个文件,工作区和版本库就会不一致,从版本库中使用这两个命令来确定删除文件
+ 
+  git reset --hard 版本id      =>> 回退到指定版本
+	
+  git merge --abort   撤销合并
+     *
+     *
+     *
+     *  ------------------- 远程仓库
+     *    git remote add origin git@远程库地址
+     *      --  自己的远程仓库里面也拥有该命令(创建一个远程库origin)
+     *    git push origin master
+     *      --  将master分支的提交到本地仓库
+     *    git remote rm 远程库名称(origin)
+     *      --  删除远程库
+     *    git remote -v
+     *      --  查看已有的GitHub远程库
+     *    git clone 远程库地址
+     *      --  克隆一份远程仓库
+     *
+     *  --------------------    分支
+     *    git branch
+     *      --  查看当前分支
+     *    git branch  分支名
+     *      --  创建分支
+     *    git checkout 分支名
+     *      --  切换分支
+     *    git checkout -b 分支名
+     *      --  表示创建并切换到该分支
+     *
+     *
+     *    ----  合并分支
+     *    在dev子分支上做了修改，然后切换为master主分支,
+     *    这时候该文件会回归到改之前的状态,这时候需要合并分支
+     *
+     *    git merge 子分支名
+     *      --  master分支合并子分支
+     *    git branch -d 子分支名
+     *      --  删除子分支
+     *
+     *
+     *     ----     冲突
+     *     当合并分支时,如果有冲突,会发出以下警告
+     *          Auto-merging readme.txt
+                CONFLICT (content): Merge conflict in readme.txt
+                Automatic merge failed; fix conflicts and then commit the result.
+            --通过git status来查看冲突文件是哪个
+     *      打开冲突文件readme.txt,会浮现以下内容：
+     *             <<<<<<< HEAD
+     *            我是dev分支用master修改后的内容
+     *            =======
+     *            我是dev分支的第二行文字
+     *            >>>>>>> dev
+     *
+     *    -----------git提交修改的操作流程
+     *     --1.切换到子分支进行操作,  操作完成后 git add . 以及  git commit -m '提交描述'
+     *     --2.切换到master分支拉取最新的数据： git pull origin master
+     *     --3.切换到子分支,  使用 git merge master命令将master中的最新数据合并到子分支
+     *     --4.出现冲突,则在子分支解决冲突
+     *     --5.解决完冲突再次git add . 以及git commit -m '提交描述'
+     *     --6.切换回master分支,使用git merge 子分支名  将子分支合并到master分支上
+     *     --7.最后将master中的最新代码推送到远程仓库 ： git push origin master
+     *
+ 
+    --拉取子分支
+    git checkout 拉取分支
+    git	pull origin 拉取分支
+    git checkout I'm分支
+    git merge 拉取分支
+  	
+    弹窗通过  :wq关闭
+  	
+  	
+    git push origin  I'm远程仓库
+  	
+    远程仓库：Merge Requests  =>  New Merge Request  =>  beta
+  	
+    git diff --check	查看冲突
+  	
+    git fetch	将远程主机的最新内容拉取到本地，用户在检查了以后决定是否合并到工作本机分支中。
+  	
+    拉取代码
+      git fetch 拉取远程的最新内容
+      切换到拉取代码的分支git pull
+      然后切换到自己的分支, git merge 合并分支名
+      git diff --check 查看冲突
+    	
+  ---------------------------------------------commit---------------------------------------------		
+    	
+  -----  修改commit的描述信息
+    1. git commit --amend     --进入修改编辑器中
+    2. 在要修改的区域修改描述信息
+    3. esc退出编辑
+    4. :wq保存并退出编辑模式
+  	
+  -----	撤销commit
+      git reset --soft HEAD^
+  	
+  ----------------------------------------------end----------------------------------------------	
+	
+	
+  ---------------------------------------------各类异常------------------------------------------
+  一、	
+  ----- 拉取新代码然后合并并提交时,通过git status发现当前状态已是最新(未进行git add  与 git commit)
+    1. git commit -a
+    2. git push origin featrue/huangxiong(分支名)
+   -- 直接删除文件夹不做任何操作提交(未成功版本)
+  操作中发现git push origin xxxxxx这步会报错，尝试发现采用SSH方式push可解决，即采用命令git push --mirror xxxxxx
+	
+	
+  ---------------------------------------------------------------------------------------------------------------
+	
+  二、
+  ------删除本地的.git文件
+    git branch
+    git init
+    ls -a
+    rm -rf.git
+  	
+  --------------------------------------------------------------------------------------------------------------
+	
+  三、
+    git push到git hub远程仓库时的报错
+    报错信息：
+      unable to access 'https://github.com/shotH240/practice.git/': SSL certificate problem: unable to get local issuer certificate
+    或：Git client in Fisheye/Crucible server perform verification on the SSL certificate and stop the process if it is unknown.
+  	
+    无法识别SSL证书，所以中止
+  	
+    解决方法：git config --global http.sslVerify false
+	
+	
+  --------------------------------------------------------------------------------------------------------------
+	
+  四、
+    git hub生成秘钥
+    git config --global user.name "shotH240"	// 绑定用户名
+    git config --global user.email "emile@emile.com"   // 绑定邮箱
+    ssh-keygen –t rsa –C "绑定邮箱@emile.com"
+    clip < ~/.ssh/id_rsa.pub
+    cat ~/.ssh/id_rsa.pub => 生成秘钥并拷贝,然后在自己的github中 设置 => ssh and GPG keys中设置秘钥,名称可随意。
+  	
+  	
+  git stash message  保存到本地
+  git stash list  查看存储栈内容
+  git stash pop  应用并删除最上面的栈元素
+
+  git stash
+
+
+  git commit -m 'message' --no-verify    => 跳过commit验证
+
+  git config --get core.ignorecase  查看git在文件夹改大小写时是否会忽略， 默认为true(忽略)
+  git config core.ignorecase false  不忽略文件名大小写
+   */
+
+
+
+
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

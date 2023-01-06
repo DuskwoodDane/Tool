@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+
+    /**
+     *  只需要一个正确的参数，就可以获取到所需要的对象，而无需知道其创建的具体细节。
+     *  但是在函数内包含了所有对象的创建逻辑和判断逻辑的代码，每增加新的构造函数还需要修改判断逻辑代码。
+     *  当我们需要创建的对象比较多时,这个函数会成为一个庞大的超级函数,使得难以维护. 所以,简单工厂只能作用于创建的对象数量较少,且对象的创建逻辑不复杂时使用
+     */
+
+
+    function User(role, pages) {
+      this.role = role;
+      this.pages = pages;
+    }
+
+    // new User('superadmin', ['home', 'main', 'user-manage', 'news-manage']);
+    // new User('admin', ['home', 'user-manage', 'news-manage']);
+    // new User('editor', ['home', 'news-manage']);
+
+    // 根据不同的标签返回不同的工厂类型
+
+    // 用户工厂
+    function UserFactory(role) {
+      switch (role) {
+        case 'superadmin':
+          return new User('superadmin', ['home', 'main', 'user-manage', 'news-manage']);
+          break;
+        case 'admin':
+          return new User('admin', ['home', 'user-manage', 'news-manage']);
+          break;
+        case 'editor':
+          return new User('editor', ['home', 'news-manage']);
+          break;
+        default:
+          return new Error('query error')
+      }
+    }
+
+    const u1 = new UserFactory('editor');
+
+
+    // class合并
+    class UserFactorySecond {
+      constructor(role, pages) {
+        this.role = role;
+        this.pages = pages;
+      }
+      Factory() {
+        return 'test'
+      }
+
+      say() {
+        return 'say'
+      }
+
+      /**
+       *  静态方法的this指向的不是实例，而是类
+       *  static 方法可以与 非 static方法重名
+       *  在类中定义的方法会被定义在原型上，而static不会
+       *  父类的static方法可以被子类继承
+       */
+      static Factory(role) {
+        console.log('this==', this.role)
+        switch (role) {
+          case 'superadmin':
+            return new UserFactorySecond('superadmin', ['home', 'main', 'user-manage', 'news-manage']);
+            break;
+          case 'admin':
+            return new UserFactorySecond('admin', ['home', 'user-manage', 'news-manage']);
+            break;
+          case 'editor':
+            return new UserFactorySecond('editor', ['home', 'news-manage']);
+            break;
+          default:
+            return new Error('query error')
+        }
+      }
+    }
+
+    const u2 = UserFactorySecond.Factory('admin')
+
+  </script>
+</body>
+
+</html>

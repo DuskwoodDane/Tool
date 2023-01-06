@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class Navbar {
+      init() {
+        console.log('navbar-init');
+      }
+
+      getData() {
+        console.log('navbar-getdata')
+      }
+
+      render() {
+        console.log('navbar-render0000')
+      }
+    }
+
+    class List {
+      init() {
+        console.log('navbar-init');
+      }
+
+      getData() {
+        console.log('navbar-getdata')
+      }
+
+      render() {
+        console.log('list-render0000')
+      }
+    }
+
+    // init执行后调用getData  getData之后再调用render，如果在init里面一步到位，逻辑层与表示层耦合，会非常混乱
+    class Creator {
+      async startBuild(builder) {
+        await builder.init();
+        await builder.getData();
+        await builder.render();
+      }
+    }
+
+    const op = new Creator();
+    op.startBuild(new List())
+    op.startBuild(new Navbar())
+  </script>
+</body>
+
+</html>

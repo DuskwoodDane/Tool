@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // 
+    const employee1 = {
+      name: 'Tom',
+      age: 10
+    }
+    const employee2 = {
+      name: 'Tom',
+      age: 13
+    }
+
+    // 构造器模式
+    function Employee(name, age) {
+      this.name = name;
+      this.age = age;
+      this.say = function () {
+        return this.name
+      }
+    }
+    console.log('11', new Employee('Dor', 15));
+    console.log('22', new Employee('Jerry', 12).say());
+
+    // 原型模式(构造器模式每次new都会重新创建一个say方法，通过原型模式只让他创建一次)
+
+    Employee.prototype.secondSay = function () {
+      return 'hi' + this.name
+    }
+    console.log('33', new Employee('Jerry', 12).secondSay());
+
+
+    // 用class统一处理
+
+    class EmploayeeLast {
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      say() {
+        return this.name;
+      }
+    }
+
+    console.log('44', new EmploayeeLast('Tom', 22).say())
+
+    // 实现tab切换
+
+    // function Tabs 
+
+  </script>
+</body>
+
+</html>
