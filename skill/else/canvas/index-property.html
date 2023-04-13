@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas</title>
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <canvas width="500px" height="300"></canvas>
+  <script>
+    const canvas = document.querySelector('canvas');
+    // canvas上下文
+    const context = canvas.getContext('2d');
+
+    /* 1. canvas  获取canvcas对象 */ 
+    console.log('canvas', context.canvas);
+
+    /* 2. fillStyle  颜色填充，默认为黑色#000 */ 
+
+    // 普通颜色 RGB色值  HEX色值： #FF0000  HSL色值：HSL(360, 100%, 50%)  HSLA色值：HSLA(360, 100%, 50%, .5)
+    // context.fillStyle = 'RGB(255, 0, 0)'; // red
+
+    // 渐变
+    // const gradientLinear = context.createLinearGradient(0, 0, 0, 100);
+    // gradientLinear.addColorStop(0, 'red');
+    // gradientLinear.addColorStop(1, 'green');
+    // context.fillStyle = gradientLinear;
+
+    // context.fillRect(10, 10, 100, 100);
+
+    // 3. globalAlpha 透明度  范围为0 - 1
+    // context.globalAlpha = 0.5;
+    // context.fillStyle = 'blue';
+    // context.fillRect(10, 10, 100, 100);
+
+    // 
+
+  </script>
+</body>
+
+</html>

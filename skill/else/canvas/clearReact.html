@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="canvas" width="500" height="300"></canvas>
+  <script>
+    const canvas = document.querySelector('#canvas');
+    const context = canvas.getContext('2d');
+
+    // 圆的水平位置
+    let x = 30;
+    // 半径
+    let redius = 30;
+
+    const clear = () => {
+      context.clearRect(0, 0, 500, 300);
+      context.fillText('清除', 20, 30);
+      setTimeout(draw, 500);
+    }
+
+    const draw = () => {
+      // 移动圆
+      x += 10;
+      if (x > 470) {
+        x = 30;
+      }
+
+      context.clearRect(0, 0, 500, 300);
+      context.fillText('绘制', 20, 30);
+      context.beginPath();
+      context.arc(x, 84, redius, 0, Math.PI * 2);
+      context.fillStyle = '#039';
+      context.fill();
+      context.stroke();
+      setTimeout(clear, 500)
+    }
+
+    draw();
+
+  </script>
+</body>
+
+</html>

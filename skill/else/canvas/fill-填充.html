@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas width="240" height="240"></canvas>
+  <script>
+    const canvas = document.querySelector('canvas');
+    const context = canvas.getContext('2d');
+    /**
+     * fillRect：x, y, width, height
+     * fillText: text, x, y
+     */
+
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+
+    console.log('xy', centerX, centerY)
+
+    // 矩形填充
+    context.fillRect(centerX - 30, centerY - 4, 60, 8);
+    context.fillRect(centerX - 5, centerY - 27, 8, 60);
+
+    // 文字填充
+    context.font = '24px STheiti, SimHei'; // 配置画布的字体大小和字体样式
+    context.fillText('Hello World', 20, 35)
+
+  </script>
+</body>
+
+</html>

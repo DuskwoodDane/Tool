@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas></canvas>
+  <script>
+    const canvas = document.querySelector('canvas');
+    const context = canvas.getContext('2d');
+    /**
+     *  bezierCurveTo
+     *  cp1x 第1个控制点的横坐标
+     *  cp1y 第1个控制点的纵坐标
+     *  cp2x 第2个控制点的横坐标
+     *  cp2x 第2个控制点的纵坐标
+     *  x 结束点的横坐标
+     *  y 结束点的纵坐标
+     */
+
+    context.beginPath();
+    context.moveTo(50, 50);
+    context.bezierCurveTo(91, 92, 162, 35, 250, 100)
+    context.stroke();
+  </script>
+</body>
+
+</html>

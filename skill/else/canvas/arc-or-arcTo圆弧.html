@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="canvas" width="500px" height="300"></canvas>
+  <script>
+    const canvas = document.querySelector('#canvas');
+    const context = canvas.getContext('2d');
+    context.fillStyle = 'RGB(255, 0, 0)';
+    context.beginPath();
+    /**
+     * x: 圆弧对应的圆心横坐标
+     * y：圆弧对应的圆心纵坐标
+     * radius: 圆弧的半径大小
+     * startAngle：圆弧开始的角度，单位是弧度
+     * endAngle：圆弧结束的角度，单位是弧度
+     * anticlockwise：弧度的开始到结束的绘制是按照顺时针来算，还是按时逆时针来算。如何设置为true，则表示按照逆时针方向从startAngle绘制到endAngle
+     */
+    // context.arc(150, 75, 30, 0, Math.PI / 2, true);
+    context.arc(150, 75, 30, 0, Math.PI * 2, true); // π * 2则为全圆
+    context.stroke();
+
+    // arcTo
+    /**
+     *  x1 第1个控制点的横坐标
+     *  y1 第1个控制点的纵坐标
+     *  x2 第2个控制点的横坐标
+     *  y2 第2个控制点的纵坐标
+     *  radius 
+     */
+    context.beginPath();
+    context.moveTo(50, 50);
+    context.arcTo(170, 100, 200, 40, 40);
+    context.lineTo(200, 40);
+    context.stroke();
+
+  </script>
+</body>
+
+</html>
