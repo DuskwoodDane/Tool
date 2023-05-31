@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /**
+    * ? 参考地址：https://www.jb51.net/article/268377.htm
+    */
+
+    /**
+    * TODO 生成范围内的随机数(大于等于n, 小于m)
+    */
+    const fun1 = (m, n) => {
+      return Math.random() * (m - n) + n;
+    }
+
+    /**
+   * TODO 生成范围内的整数(小数去掉floor即可) 小于等于max 大于等于min
+   */
+    const fun2 = (min, max) => {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // console.log(fun1(20, 19));
+
+    console.log(fun2(5, 10))
+  </script>
+</body>
+
+</html>

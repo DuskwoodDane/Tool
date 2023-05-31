@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.querySelector('#canvas');
+    const context = canvas.getContext('2d');
+
+    const lineList = [
+      [80, 50, 100, 60],
+      [90, 50, 100, 60],
+      [80, 50, 100, 60],
+      [80, 50, 100, 60],
+      [80, 50, 100, 60],
+      [80, 50, 100, 60],
+      [80, 50, 100, 60],
+      [80, 50, 100, 60],
+      [80, 50, 100, 60],
+      [80, 50, 100, 60]
+    ]
+
+    const view = () => {
+      context.beginPath();
+
+      context.moveTo(80, 50);
+      context.lineTo(100, 60);
+
+      context.stroke();
+    }
+
+    view();
+  </script>
+</body>
+
+</html>

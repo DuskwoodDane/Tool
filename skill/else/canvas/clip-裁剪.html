@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="canvas" width="500" height="300"></canvas>
+  <script>
+    const canvas = document.querySelector('#canvas');
+    const context = canvas.getContext('2d');
+    context.fillStyle = 'RGB(255, 0, 0)';
+    // const img = new Image();
+    // img.onload = () => {
+    //   context.beginPath();
+    //   context.moveTo(20, 20);
+    //   context.lineTo(200, 80);
+    //   context.lineTo(110, 190);
+    //   //
+    //   context.clip();
+    //   context.drawImage(img, 0, 0, 500, 300);
+    // }
+    // img.src = './images/dice.png';
+
+    context.lineWidth = 2;
+    context.strokeRect(0, 0, 500, 300);
+    context.fillRect(0, 0, 500, 300)
+
+    const img = new Image();
+    img.onload = () => {
+      context.beginPath();
+      context.moveTo(20, 20);
+      context.lineTo(200, 80);
+      context.lineTo(110, 190);
+      // context.stroke();
+      context.clip();
+      context.drawImage(img, 0, 0, 500, 300);
+    }
+    img.src = './images/dice.png';
+
+
+
+
+
+  </script>
+</body>
+
+</html>

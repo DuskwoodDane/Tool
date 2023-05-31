@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas width="500" height="500"></canvas>
+  <script>
+    console.log('nv', navigator.geolocation)
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log('position', position)
+    })
+    window.onload = () => {
+      const canvas = document.querySelector('canvas');
+      const ctx = canvas.getContext('2d');
+
+      const sun = new Image();
+      sun.src = 'https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/640b4df0a5074e9a9bf4777fdf1fd74e~tplv-k3u1fbpfcp-watermark.image'
+      const earth = new Image();
+      earth.src = 'https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f4ad71733e934b818a52bcfea56a683f~tplv-k3u1fbpfcp-watermark.image';
+      const moon = new Image();
+      moon.src = 'https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/05bc3992bd5044448f029b7d68049b38~tplv-k3u1fbpfcp-watermark.image';
+      requestAnimationFrame(draw);
+
+      function draw() {
+        ctx.clearRect(0, 0, 500, 500);
+        ctx.save();
+        drawBg();
+        ctx.restore();
+        requestAnimationFrame(draw);
+      }
+
+      function drawBg() {
+        ctx.save();
+        ctx.drawImage(sun, 0, 0, 500, 500);
+        // 位移
+        ctx.translate(250, 250);
+        // 描边颜色
+        ctx.strokeStyle = "rgba(0, 153, 255, 0.4)";
+        // 绘制轨道
+        ctx.beginPath();
+        ctx.arc(0, 0, 105, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+  </script>
+</body>
+
+</html>

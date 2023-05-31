@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    button {
+      width: 95px;
+      height: 37px;
+      text-align: center;
+      line-height: 37px;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="500px" height="500px"></canvas>
+  <button>Click</button>
+  <script>
+    const dom = document.querySelector('canvas');
+    const ctx = dom.getContext('2d');
+    const btn = document.querySelector('button');
+
+    const w = 500, h = 500;
+
+    const target = {
+      value: 1.01,
+      point: 1.01
+    };
+
+    const draw = (value) => {
+      ctx.fillStyle = '#3458a4';
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = 'rgba(255, 255, 255)'
+      ctx.font = '96px 微软雅黑'
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      // 将文字的xy轴设置为图层的一半 使其居中
+      ctx.fillText(value, w / 2, h / 2)
+    }
+
+    // 生成指定范围的随机数
+    const generate = (max = 10, min = 6) => {
+      const random = Math.random() * (max - min + 1) + min;
+      return random.toFixed(2);
+    }
+
+    btn.onclick = () => {
+      console.log('test==');
+      target.point = generate();
+    }
+
+    Object.defineProperty(target, 'point', {
+      get() {
+        return this._point;
+      },
+      set(newVal) {
+        const sliciing = Number((newVal / 20).toFixed(2));
+        let num = this.value;
+        const interval = setInterval(() => {
+          if ((num + sliciing) < newVal) {
+            num += sliciing;
+            draw(num.toFixed(2));
+          } else {
+            clearInterval(interval);
+            draw(newVal)
+          }
+        }, 50)
+
+        this._value = newVal;
+      }
+    })
+
+
+    draw(target.value);
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-color: #000;
+      height: 100%;
+    }
+
+    .board-content {
+      width: 175px;
+      height: 278px;
+      background: url('./images/base.png');
+      margin: 0 auto;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 175px;
+      height: 258px;
+    }
+
+    .ace-ami {
+      animation: ace-ami .1s linear forwards;
+    }
+
+    .show {
+      display: inline-block;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @keyframes ace-ami {
+      from {
+        transform: rotateY(0);
+      }
+
+      to {
+        transform: rotateY(90deg);
+      }
+    }
+
+    .joker {}
+
+    .joker-ami {
+      animation: joker-ami .1s linear forwards;
+    }
+
+    @keyframes joker-ami {
+      from {
+        transform: rotateY(90deg);
+      }
+
+      to {
+        transform: rotateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="board-content">
+    <img class="ace" src="./images/boardSide.png" />
+    <img class="joker hidden" src="./images/diamond10.png" />
+  </div>
+  <button id="toggle">Toggle</button>
+  <button id="next">Next</button>
+  <script>
+    const toggleBtn = document.querySelector('#toggle');
+    const nextBtn = document
+    const ace = document.querySelector('.ace');
+    const joker = document.querySelector('.joker');
+
+    let hideState = true;
+
+    let index = 1;
+
+    let currentCard = `diamond${index}`;
+
+    const jokerClassList = [];
+
+
+    // 底牌与扑克牌切换
+    const toggle = () => {
+      ace.classList.add('ace-ami');
+      setTimeout(() => {
+        // ace.classList.remove('ace-ami')
+        ace.classList.add('hidden')
+        joker.classList.remove('hidden');
+        joker.classList.add('show', 'joker-ami')
+      }, 100)
+    }
+
+
+    toggleBtn.onclick = () => {
+      console.log('ccc', ace.classList)
+      // ace.classList.add('ace-ami');
+      // setTimeout(() => {
+      //   ace.classList.remove('ace-ami')
+      // }, 80)
+      toggle();
+    }
+  </script>
+</body>
+
+</html>

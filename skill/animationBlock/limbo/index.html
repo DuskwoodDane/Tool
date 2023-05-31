@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 500px;
+      height: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid lightcoral;
+    }
+
+    .text {
+      font-size: 96px;
+      color: black;
+    }
+
+    button {
+      width: 95px;
+      height: 37px;
+      text-align: center;
+      line-height: 37px;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="text"></div>
+  </div>
+  <button>click</button>
+
+  <script>
+    const button = document.querySelector('button');
+    const text = document.querySelector('.text');
+
+    const init = 1.01
+
+    let target = {
+      value: 1.01,
+      point: 1.01
+    };
+
+    text.innerText = target.value;
+
+    // 生成指定范围的随机数
+    const generate = (max = 10, min = 6) => {
+      const random = Math.random() * (max - min + 1) + min;
+      return random.toFixed(2);
+    }
+
+    button.onclick = () => {
+      target.point = generate();
+    }
+
+    Object.defineProperty(target, 'point', {
+      get() {
+        console.log('get==', this._point)
+        return this._point
+      },
+
+      set(newVal) {
+        this._point = newVal;
+        console.log('point', newVal)
+        // 将数字切成20份(切的份数越大, 数字转动的时间越长)
+        const sliciing = Number((newVal / 20).toFixed(2));
+        let num = init;
+        const interval = setInterval(() => {
+          if (num + sliciing < newVal) {
+            num += sliciing;
+            target.value = num;
+            text.innerText = num.toFixed(2);
+          } else {
+            clearInterval(interval);
+            text.innerText = newVal;
+          }
+        }, 50)
+      }
+    })
+
+  </script>
+</body>
+
+</html>
